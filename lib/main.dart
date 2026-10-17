@@ -609,7 +609,7 @@ class _NotesHomeState extends State<NotesHome> {
                   children: <Widget>[
                     _StatPill(
                       icon: Icons.sticky_note_2_outlined,
-                      label: widget.notes.length == 1 ? '1 note' : '\${widget.notes.length} notes',
+                      label: widget.notes.length == 1 ? '1 note' : '${widget.notes.length} notes',
                       darkMode: widget.darkMode,
                     ),
                     const SizedBox(width: 8),
@@ -662,7 +662,7 @@ class _NotesHomeState extends State<NotesHome> {
                     ),
                     const Spacer(),
                     Text(
-                      '\${visibleNotes.length} shown',
+                      '${visibleNotes.length} shown',
                       style: TextStyle(
                         fontSize: 11,
                         color: theme.colorScheme.onSurfaceVariant,
@@ -1026,7 +1026,7 @@ class _NotesHomeState extends State<NotesHome> {
                             ),
                             child: Icon(
                               categoryIcon(category),
-                              color: const Color(0xFF514A78),
+                              color: widget.darkMode ? theme.colorScheme.primary : const Color(0xFF514A78),
                               size: 24,
                             ),
                           ),
@@ -1041,7 +1041,7 @@ class _NotesHomeState extends State<NotesHome> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            count.toString() + (count == 1 ? ' note' : ' notes'),
+                            count == 1 ? '1 note' : '$count notes',
                             style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xFF656174),
@@ -1386,5 +1386,5 @@ String formatNoteDate(DateTime date) {
     'Nov',
     'Dec',
   ];
-  return '\${date.day} \${months[date.month - 1]}';
+  return '${date.day} ${months[date.month - 1]}';
 }

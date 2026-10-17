@@ -40,6 +40,8 @@ jobs:
           rm -rf /tmp/noteflow-build/lib /tmp/noteflow-build/test
           cp -R lib /tmp/noteflow-build/lib
           cp -R test /tmp/noteflow-build/test
+          cp .gitignore /tmp/noteflow-build/.gitignore
+          cp README.md /tmp/noteflow-build/README.md
           mkdir -p /tmp/noteflow-build/android/app/src/main
           cp android/app/src/main/AndroidManifest.xml /tmp/noteflow-build/android/app/src/main/AndroidManifest.xml
 
@@ -80,5 +82,23 @@ jobs:
         with:
           name: NoteFlow-Web-Demo
           path: /tmp/noteflow-build/build/web/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload complete Flutter source project
+        uses: actions/upload-artifact@v4
+        with:
+          name: NoteFlow-Flutter-Source-Project
+          path: |
+            /tmp/noteflow-build/README.md
+            /tmp/noteflow-build/.gitignore
+            /tmp/noteflow-build/.metadata
+            /tmp/noteflow-build/analysis_options.yaml
+            /tmp/noteflow-build/pubspec.yaml
+            /tmp/noteflow-build/pubspec.lock
+            /tmp/noteflow-build/lib/
+            /tmp/noteflow-build/test/
+            /tmp/noteflow-build/android/
+            /tmp/noteflow-build/web/
           if-no-files-found: error
           retention-days: 14

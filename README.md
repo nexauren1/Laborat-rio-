@@ -17,8 +17,9 @@ NoteFlow is a Flutter notes app designed for a simple, calm, offline-first exper
 2. Open the latest successful "Build NoteFlow demo" run.
 3. Download the artifact named "NoteFlow-Android-Demo-APK".
 4. Extract the ZIP and install app-release.apk on an Android device.
+5. Download NoteFlow-Flutter-Source-Project for the complete editable Flutter project.
 
-The workflow also uploads a web build as "NoteFlow-Web-Demo". GitHub stores these artifacts for 14 days.
+The workflow also uploads a web build as "NoteFlow-Web-Demo" and a complete Flutter project as "NoteFlow-Flutter-Source-Project". GitHub stores these artifacts for 14 days.
 
 ## Build details
 
