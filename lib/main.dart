@@ -219,7 +219,7 @@ ThemeData lightTheme() {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: Colors.white,
-      indicatorColor: brandColor.withOpacity(0.12),
+      indicatorColor: brandColor.withValues(alpha: 0.12),
       labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
         (Set<WidgetState> states) => TextStyle(
           fontSize: 12,
@@ -264,7 +264,7 @@ ThemeData darkTheme() {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: const Color(0xFF1A1B24),
-      indicatorColor: const Color(0xFF8E82FF).withOpacity(0.22),
+      indicatorColor: const Color(0xFF8E82FF).withValues(alpha: 0.22),
     ),
   );
 }
@@ -464,7 +464,7 @@ class _NotesHomeState extends State<NotesHome> {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: brandColor.withOpacity(0.25),
+                    color: brandColor.withValues(alpha: 0.25),
                     blurRadius: 12,
                     offset: const Offset(0, 5),
                   ),
@@ -559,7 +559,7 @@ class _NotesHomeState extends State<NotesHome> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: brandColor.withOpacity(widget.darkMode ? 0.22 : 0.09),
+                    color: brandColor.withValues(alpha: widget.darkMode ? 0.22 : 0.09),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Text(
@@ -609,8 +609,7 @@ class _NotesHomeState extends State<NotesHome> {
                   children: <Widget>[
                     _StatPill(
                       icon: Icons.sticky_note_2_outlined,
-                      label: widget.notes.length.toString() +
-                          (widget.notes.length == 1 ? ' note' : ' notes'),
+                      label: widget.notes.length == 1 ? '1 note' : '\${widget.notes.length} notes',
                       darkMode: widget.darkMode,
                     ),
                     const SizedBox(width: 8),
@@ -663,7 +662,7 @@ class _NotesHomeState extends State<NotesHome> {
                     ),
                     const Spacer(),
                     Text(
-                      visibleNotes.length.toString() + ' shown',
+                      '\${visibleNotes.length} shown',
                       style: TextStyle(
                         fontSize: 11,
                         color: theme.colorScheme.onSurfaceVariant,
@@ -724,7 +723,7 @@ class _NotesHomeState extends State<NotesHome> {
         side: BorderSide(
           color: selected
               ? brandColor
-              : theme.colorScheme.outlineVariant.withOpacity(0.55),
+              : theme.colorScheme.outlineVariant.withValues(alpha: 0.55),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 5),
       ),
@@ -742,7 +741,7 @@ class _NotesHomeState extends State<NotesHome> {
               width: 76,
               height: 76,
               decoration: BoxDecoration(
-                color: brandColor.withOpacity(0.1),
+                color: brandColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(26),
               ),
               child: const Icon(
@@ -785,15 +784,15 @@ class _NotesHomeState extends State<NotesHome> {
   Widget _noteCard(Note note, ThemeData theme) {
     final Color storedColor = Color(note.colorValue);
     final Color background =
-        widget.darkMode ? storedColor.withOpacity(0.19) : storedColor;
+        widget.darkMode ? storedColor.withValues(alpha: 0.19) : storedColor;
     return Container(
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(
           color: widget.darkMode
-              ? Colors.white.withOpacity(0.07)
-              : Colors.black.withOpacity(0.025),
+              ? Colors.white.withValues(alpha: 0.07)
+              : Colors.black.withValues(alpha: 0.025),
         ),
       ),
       child: Material(
@@ -815,7 +814,7 @@ class _NotesHomeState extends State<NotesHome> {
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(
+                          color: Colors.white.withValues(alpha: 
                             widget.darkMode ? 0.09 : 0.65,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -1003,7 +1002,7 @@ class _NotesHomeState extends State<NotesHome> {
                     .length;
                 final Color color = noteColors[index % noteColors.length];
                 return Material(
-                  color: widget.darkMode ? color.withOpacity(0.18) : color,
+                  color: widget.darkMode ? color.withValues(alpha: 0.18) : color,
                   borderRadius: BorderRadius.circular(24),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(24),
@@ -1022,7 +1021,7 @@ class _NotesHomeState extends State<NotesHome> {
                             width: 46,
                             height: 46,
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.65),
+                              color: Colors.white.withValues(alpha: 0.65),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Icon(
@@ -1088,7 +1087,7 @@ class _StatPill extends StatelessWidget {
       decoration: BoxDecoration(
         color: darkMode ? const Color(0xFF20212A) : Colors.white,
         border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.4),
+          color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
         ),
         borderRadius: BorderRadius.circular(30),
       ),
@@ -1253,7 +1252,7 @@ class _NoteEditorSheetState extends State<NoteEditorSheet> {
                 ),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
-                  value: noteCategories.contains(_category) ? _category : 'Other',
+                  initialValue: noteCategories.contains(_category) ? _category : 'Other',
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.folder_outlined),
                   ),
@@ -1387,5 +1386,5 @@ String formatNoteDate(DateTime date) {
     'Nov',
     'Dec',
   ];
-  return date.day.toString() + ' ' + months[date.month - 1];
+  return '\${date.day} \${months[date.month - 1]}';
 }
